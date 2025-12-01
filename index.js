@@ -95,15 +95,15 @@ let votosCategorias = carregarVotos();
 
 if (!votosCategorias || Object.keys(votosCategorias).length === 0) {
     votosCategorias = {
-        "SUB6": { candidatos: [
+        "sub6": { candidatos: [
             { nome: "Pedro Veloz", votos: 0 },
             { nome: "Lucas Goleador", votos: 0 }
         ]},
-        "SUB7": { candidatos: [
+        "sub7": { candidatos: [
             { nome: "Gabriel Ágil", votos: 0 },
             { nome: "Matheus Forte", votos: 0 }
         ]},
-        "SUB8": { candidatos: [
+        "sub8": { candidatos: [
             { nome: "Davi Drible", votos: 0 },
             { nome: "Felipe Defesa", votos: 0 }
         ]}
