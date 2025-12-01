@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prêmio Votação Digital</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <h1 class="titulo">Prêmio Votação Digital</h1>
-
-    <div class="menu-topo">
-        <button onclick="mostrarPagina('votar')" id="btnVotar" class="menu-btn ativo">Página de Votação</button>
-        <button onclick="mostrarPagina('contagem')" id="btnContagem" class="menu-btn">Contagem de Votos</button>
+    <div class="top-menu">
+        <button id="btnVotacao" class="menu-btn active">Página de Votação</button>
+        <button id="btnRanking" class="menu-btn">Contagem de Votos</button>
     </div>
 
-    <!-- ================= SEÇÃO VOTAR ================= -->
-    <div id="paginaVotar" class="pagina">
+    <!-- TELA DE VOTAÇÃO -->
+    <div id="votacaoContainer">
 
-        <h2 class="sub-titulo">Selecione uma Categoria</h2>
+        <h2>Selecione uma Categoria</h2>
 
-        <div class="categorias">
-            <button class="cat-btn ativo" data-cat="sub6" onclick="selecionarCategoria(this)">Sub-6</button>
-            <button class="cat-btn" data-cat="sub7" onclick="selecionarCategoria(this)">Sub-7</button>
-            <button class="cat-btn" data-cat="sub8" onclick="selecionarCategoria(this)">Sub-8</button>
+        <div class="categoria-buttons">
+            <button class="cat-btn" data-cat="sub6">Sub-6</button>
+            <button class="cat-btn" data-cat="sub7">Sub-7</button>
+            <button class="cat-btn" data-cat="sub8">Sub-8</button>
         </div>
 
-        <div id="cardsContainer" class="cards"></div>
+        <div id="candidatosContainer" class="cards-area"></div>
     </div>
 
-    <!-- ================= SEÇÃO CONTAGEM DE VOTOS ================= -->
-    <div id="paginaContagem" class="pagina escondido">
+    <!-- TELA DE RANKING -->
+    <div id="rankingContainer" style="display:none;">
+        <h1>Resultados em Tempo Real</h1>
+        <div id="rankingContent"></div>
+    </div>
 
-        <h2 class="sub-titulo">Resultados em Tempo Real</h2>
-        <div id="rankingContainer"></div>
-
+    <div id="senhaOverlay" class="overlay" style="display:none;">
+        <div class="popup">
+            <h3>Senha de Acesso</h3>
+            <input id="senhaInput" type="password" placeholder="Digite a senha">
+            <button id="confirmarSenha">Entrar</button>
+        </div>
     </div>
 
     <script src="index.js"></script>
 </body>
+
 </html>

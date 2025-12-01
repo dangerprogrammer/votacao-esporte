@@ -1,235 +1,171 @@
 body {
-    background: #0f1323;
-    margin: 0;
-    padding: 0;
+    background: #0f1624;
+    color: white;
     font-family: Arial, sans-serif;
-    color: #fff;
     text-align: center;
+    margin: 0;
+    padding: 20px;
 }
 
-.titulo {
-    margin-top: 30px;
-    font-size: 38px;
-    color: #ff6d1b;
-}
-
-.sub-titulo {
-    margin-top: 25px;
-    font-size: 26px;
-}
-
-.menu-topo {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+.top-menu {
+    margin-bottom: 20px;
 }
 
 .menu-btn {
-    padding: 10px 25px;
-    font-size: 17px;
-    background: #1e2240;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 25px;
     border: none;
-    color: #fff;
-    border-radius: 8px;
     cursor: pointer;
-    transition: 0.2s;
+    font-weight: bold;
+    background: #1e2536;
+    color: white;
 }
 
-.menu-btn.ativo {
-    background: #5b53ff;
+.menu-btn.active {
+    background: #5b4dff;
 }
 
-.menu-btn:hover {
-    opacity: .85;
+.senha-box {
+    margin: 20px auto;
 }
 
-.pagina {
-    margin-top: 25px;
+.senha-box input {
+    padding: 10px;
+    width: 180px;
+    border-radius: 8px;
+    border: none;
 }
 
-.escondido {
-    display: none;
+.senha-box button {
+    padding: 10px 15px;
+    margin-left: 10px;
 }
 
-/* ====== BOTÕES DE CATEGORIAS ====== */
-
-.categorias {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
+.categoria-buttons {
+    margin: 15px 0;
 }
 
 .cat-btn {
-    padding: 8px 22px;
-    background: #1b1f35;
-    border: none;
-    color: #fff;
+    padding: 10px 28px;
+    margin: 5px;
     border-radius: 25px;
+    border: 2px solid transparent;
+    color: white;
+    background: #20283a;
     cursor: pointer;
-    font-size: 15px;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
-.cat-btn.ativo {
-    background: #ff6d1b;
+.cat-btn:hover,
+.cat-btn.active {
+    background: #5b4dff;
 }
 
-.cat-btn:hover {
-    transform: scale(1.07);
-}
-
-/* ====== CARDS ====== */
-
-.cards {
-    margin-top: 25px;
+.cards-area {
     display: flex;
     justify-content: center;
     gap: 25px;
     flex-wrap: wrap;
+    padding-top: 10px;
 }
 
 .card {
-    width: 270px;
-    padding: 25px;
-    background: #171c2d;
-    border-radius: 18px;
-    text-align: center;
+    background: #161c28;
+    padding: 20px;
+    width: 280px;
+    border-radius: 15px;
 }
 
-.foto-wrapper {
-    width: 125px;
-    height: 125px;
-    margin: auto;
+.circle {
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background: #222a48;
-    border: 4px solid #5b53ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    margin: auto;
+    background-size: cover;
+    background-position: center;
+    background-color: #1f2638;
+    border: 3px solid #5b4dff;
 }
 
-.foto-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.nome {
-    margin-top: 15px;
-    font-size: 20px;
-}
-
-.categoria-label {
-    margin-top: 5px;
-    font-size: 15px;
-    color: #b9b9b9;
-}
-
-/* BOTÃO VOTAR */
-.votar-btn {
+.vote-btn {
     margin-top: 15px;
     padding: 10px 25px;
-    background: #5b53ff;
+    border-radius: 20px;
+    background: #5b4dff;
     border: none;
-    border-radius: 25px;
-    color: #fff;
+    color: white;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-.votar-btn:hover {
-    transform: scale(1.1);
-}
-
-/* ====== RANKING ====== */
-
-#rankingContainer {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
+/* Ranking */
 .rank-box {
-    background: #171c2d;
+    background: #161c28;
     padding: 20px;
-    border-radius: 14px;
+    border-radius: 12px;
+    margin-bottom: 25px;
     text-align: left;
 }
 
-.rank-titulo {
-    font-size: 20px;
-    margin-bottom: 12px;
-}
-
-/* ====== RANK ITEM (corrigido para alinhar corretamente) ====== */
-.rank-item {
-    display: grid;
-    grid-template-columns: 40px 1fr 110px; /* número | conteúdo | valor */
-    gap: 12px;
-    align-items: center;
-    padding: 10px 0;
-    color: #fff;
-}
-
-/* bolinha com o número */
-.rank-num {
-    width: 30px;
-    height: 30px;
-    background: #ff7b1b;
-    color: #fff;
-    border-radius: 50%;
+.rank-line {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-weight: 700;
-    font-size: 14px;
+    justify-content: space-between;
+    margin: 8px 0;
 }
 
-/* coluna do meio: nome em cima e barra embaixo */
-.rank-item > div:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.bar-bg {
+    width: 70%;
+    height: 8px;
+    background: #2c3244;
+    border-radius: 6px;
+    margin: 0 10px;
 }
 
-/* nome (fica alinhado com a barra) */
-.rank-item > div:nth-child(2) > div:first-child {
-    font-size: 15px;
-    line-height: 1;
-}
-
-/* barra de fundo */
-.rank-bar {
-    width: 100%;
-    height: 10px;
-    background: #2b314d;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-}
-
-/* preenchimento com transição suave */
-.rank-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #5b53ff, #7a70ff);
-    border-radius: 10px;
+.bar-fill {
+    height: 8px;
+    background: #5b4dff;
+    border-radius: 6px;
     width: 0%;
-    transition: width 350ms ease;
-    display: block;
+    transition: width .3s;
 }
 
-/* valor + porcentagem (lado direito) */
-.rank-val {
-    font-weight: 700;
-    font-size: 14px;
-    text-align: right;
-    white-space: nowrap;
-    color: #e6e9ff;
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.popup {
+    background: #161c28;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    width: 260px;
+    box-shadow: 0 0 10px black;
+}
+
+.popup input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+.popup button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #5b4dff;
+    color: white;
+    cursor: pointer;
 }

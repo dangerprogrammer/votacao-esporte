@@ -1,170 +1,150 @@
-// ====== DADOS ======
-
-const alunos = {
+// ========================
+// DADOS
+// ========================
+const categorias = {
     sub6: [
-        { nome: "Pedro Veloz", imgSrc: "", votos: 0 },
-        { nome: "Lucas Goleador", imgSrc: "", votos: 0 }
+        { nome: "Pedro Veloz", img: "img/pedro.png" },
+        { nome: "Lucas Goleador", img: "img/lucas.png" }
     ],
     sub7: [
-        { nome: "Gabriel Ágil", imgSrc: "", votos: 0 },
-        { nome: "Matheus Forte", imgSrc: "", votos: 0 }
+        { nome: "Gabriel Ágil", img: "img/gabriel.png" },
+        { nome: "Matheus Forte", img: "img/matheus.png" }
     ],
     sub8: [
-        { nome: "Davi Drible", imgSrc: "", votos: 0 },
-        { nome: "Felipe Defesa", imgSrc: "", votos: 0 }
+        { nome: "Davi Drible", img: "img/davi.png" },
+        { nome: "Felipe Defesa", img: "img/felipe.png" }
     ]
 };
 
-let categoriaAtual = "sub6";
+// ========================
+// VOTOS (localStorage)
+// ========================
+let votos = JSON.parse(localStorage.getItem("votos")) || {
+    sub6: [0, 0],
+    sub7: [0, 0],
+    sub8: [0, 0]
+};
 
-const cardsContainer = document.getElementById("cardsContainer");
+function salvarVotos() {
+    localStorage.setItem("votos", JSON.stringify(votos));
+}
+
+// ========================
+// PAGINAÇÃO
+// ========================
+const votacaoContainer = document.getElementById("votacaoContainer");
 const rankingContainer = document.getElementById("rankingContainer");
+const rankingContent = document.getElementById("rankingContent");
 
-// ====== TROCAR ENTRE PÁGINAS ======
+// ========================
+// MOSTRAR CATEGORIA
+// ========================
+document.querySelectorAll(".cat-btn").forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        mostrarCandidatos(btn.dataset.cat);
+    });
 
-function mostrarPagina(pagina) {
-    document.getElementById("paginaVotar").classList.add("escondido");
-    document.getElementById("paginaContagem").classList.add("escondido");
+    if (i == 0) btn.click();
+});
 
-    document.getElementById("btnVotar").classList.remove("ativo");
-    document.getElementById("btnContagem").classList.remove("ativo");
+function mostrarCandidatos(cat) {
+    const box = document.getElementById("candidatosContainer");
+    box.innerHTML = "";
 
-    if (pagina === "votar") {
-        document.getElementById("paginaVotar").classList.remove("escondido");
-        document.getElementById("btnVotar").classList.add("ativo");
-        carregarCategoria(categoriaAtual);
-    } else {
-        document.getElementById("paginaContagem").classList.remove("escondido");
-        document.getElementById("btnContagem").classList.add("ativo");
-        mostrarRanking();
-    }
-}
-
-// ====== CARREGAR CATEGORIA ======
-
-function selecionarCategoria(btn) {
-    document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("ativo"));
-    btn.classList.add("ativo");
-
-    categoriaAtual = btn.dataset.cat;
-    carregarCategoria(categoriaAtual);
-}
-
-function carregarCategoria(cat) {
-    cardsContainer.innerHTML = "";
-
-    alunos[cat].forEach((aluno, index) => {
-
-        cardsContainer.innerHTML += `
+    categorias[cat].forEach((c, i) => {
+        box.innerHTML += `
             <div class="card">
-                <div class="foto-wrapper">
-                    <img src="${aluno.imgSrc}">
-                </div>
-
-                <div class="nome">${aluno.nome}</div>
-                <div class="categoria-label">${cat.toUpperCase()}</div>
-
-                <button class="votar-btn" onclick="votar('${cat}', ${index})">Votar</button>
+                <div class="circle" style="background-image:url('${c.img}')"></div>
+                <h3>${c.nome}</h3>
+                <p>${cat.toUpperCase()}</p>
+                <button class="vote-btn" onclick="votar('${cat}', ${i})">Votar</button>
             </div>
         `;
     });
 }
 
-carregarCategoria("sub6");
-
-// =========================
-// CARREGAR VOTOS DO localStorage
-// =========================
-function carregarVotos() {
-    const salvo = localStorage.getItem("votosCategorias");
-    if (!salvo) return {}; // primeira vez
-    return JSON.parse(salvo);
+// ========================
+// VOTAR
+// ========================
+function votar(cat, i) {
+    votos[cat][i]++;
+    salvarVotos();
+    alert("Voto registrado!");
 }
 
-// =========================
-// SALVAR VOTOS NO localStorage
-// =========================
-function salvarVotos(data) {
-    localStorage.setItem("votosCategorias", JSON.stringify(data));
-}
-
-// =========================
-// ESTRUTURA INICIAL (caso não exista)
-// =========================
-let votosCategorias = carregarVotos();
-
-if (!votosCategorias || Object.keys(votosCategorias).length === 0) {
-    votosCategorias = {
-        "sub6": { candidatos: [
-            { nome: "Pedro Veloz", votos: 0 },
-            { nome: "Lucas Goleador", votos: 0 }
-        ]},
-        "sub7": { candidatos: [
-            { nome: "Gabriel Ágil", votos: 0 },
-            { nome: "Matheus Forte", votos: 0 }
-        ]},
-        "sub8": { candidatos: [
-            { nome: "Davi Drible", votos: 0 },
-            { nome: "Felipe Defesa", votos: 0 }
-        ]}
-    };
-
-    salvarVotos(votosCategorias);
-}
-
-// =========================
-// FUNÇÃO DE VOTAR
-// =========================
-function votar(categoria, indexJogador) {
-    votosCategorias[categoria].candidatos[indexJogador].votos++;
-
-    salvarVotos(votosCategorias);
-
-    alert("Voto computado!");
-    mostrarRanking(); // se quiser atualizar imediatamente
-}
-
-// =========================
-// MOSTRAR RESULTADOS
-// =========================
+// ========================
+// RANKING
+// ========================
 function mostrarRanking() {
-    const div = document.getElementById("rankingContainer");
-    div.innerHTML = "";
+    rankingContent.innerHTML = "";
 
-    for (const categoria in votosCategorias) {
-        const grupo = votosCategorias[categoria].candidatos;
+    Object.keys(categorias).forEach(cat => {
+        const total = votos[cat].reduce((a, b) => a + b, 0);
 
-        // ordem decrescente por votos
-        const ordenado = [...grupo].sort((a, b) => b.votos - a.votos);
+        let list = categorias[cat].map((c, i) => ({
+            nome: c.nome,
+            votos: votos[cat][i],
+            pct: total ? ((votos[cat][i] / total) * 100).toFixed(1) : 0
+        }));
 
-        const total = grupo.reduce((acc, c) => acc + c.votos, 0);
+        list.sort((a, b) => b.votos - a.votos);
 
-        let bloco = `
-            <div class="rank-group">
-                <h2>${categoria} (${total} Votos)</h2>
+        let html = `
+            <div class="rank-box">
+                <h3>${cat.toUpperCase()} (${total} votos)</h3>
         `;
 
-        ordenado.forEach((c, idx) => {
-            let pct = total === 0 ? 0 : (c.votos / total) * 100;
-            let pctWidth = pct === 0 ? 0.6 : pct; // barra mínima
-
-            bloco += `
-                <div class="rank-item">
-                    <div class="rank-num">${idx + 1}</div>
-
-                    <div>
-                        <div>${c.nome}</div>
-                        <div class="rank-bar">
-                            <div class="rank-bar-fill" style="width:${pctWidth}%"></div>
-                        </div>
-                    </div>
-
-                    <div class="rank-val">${c.votos} (${pct.toFixed(1)}%)</div>
+        list.forEach(item => {
+            html += `
+                <div class="rank-line">
+                    <span>${item.nome}</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width:${item.pct}%"></div></div>
+                    <span>${item.votos} (${item.pct}%)</span>
                 </div>
             `;
         });
 
-        bloco += `</div>`;
-        div.innerHTML += bloco;
-    }
+        html += `</div>`;
+        rankingContent.innerHTML += html;
+    });
 }
+
+// ========================
+// PROTEÇÃO POR SENHA
+// ========================
+const SENHA = "1234";
+
+// abrir popup
+document.getElementById("btnRanking").onclick = () => {
+    document.getElementById("senhaOverlay").style.display = "flex";
+    document.getElementById("senhaInput").value = "";
+};
+
+// confirmar senha
+document.getElementById("confirmarSenha").onclick = () => {
+    const senha = document.getElementById("senhaInput").value;
+
+    if (senha === SENHA) {
+        document.getElementById("senhaOverlay").style.display = "none";
+        votacaoContainer.style.display = "none";
+        rankingContainer.style.display = "block";
+        document.getElementById("btnRanking").classList.add("active");
+        document.getElementById("btnVotacao").classList.remove("active");
+        mostrarRanking();
+    } else {
+        alert("Senha incorreta!");
+        document.getElementById("senhaOverlay").style.display = "none";
+        votacaoContainer.style.display = "block";
+        rankingContainer.style.display = "none";
+    }
+};
+
+// voltar para votação
+document.getElementById("btnVotacao").onclick = () => {
+    votacaoContainer.style.display = "block";
+    rankingContainer.style.display = "none";
+    document.getElementById("btnRanking").classList.remove("active");
+    document.getElementById("btnVotacao").classList.add("active");
+};
