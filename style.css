@@ -7,6 +7,12 @@ body {
     padding: 20px;
 }
 
+.titulo {
+    margin-top: 30px;
+    font-size: 38px;
+    color: #ff6d1b;
+}
+
 .top-menu {
     margin-bottom: 20px;
 }
