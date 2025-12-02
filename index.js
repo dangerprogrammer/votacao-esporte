@@ -3,7 +3,7 @@
 // ========================
 const categorias = {
     sub6: [
-        { nome: "Pedro Veloz", img: "img/pedro.png" },
+        { nome: "Pedro Veloz", img: "imgs/pedro.png" },
         { nome: "Lucas Goleador", img: "img/lucas.png" }
     ],
     sub7: [
@@ -148,3 +148,50 @@ document.getElementById("btnVotacao").onclick = () => {
     document.getElementById("btnRanking").classList.remove("active");
     document.getElementById("btnVotacao").classList.add("active");
 };
+
+function gerarPDF() {
+    // Seleciona o elemento que você quer imprimir
+    const element = document.getElementById('rankingContainer');
+
+    // Configurações do PDF
+    const options = {
+        margin: [20, 20, 20, 20], // Margens (topo, esq, baixo, dir)
+        filename: 'resultado-votacao.pdf', // Nome do arquivo
+        image: { type: 'jpeg', quality: 0.98 }, // Qualidade da imagem
+        html2canvas: {
+            scale: 2, // Aumenta a escala para melhor resolução
+            logging: true,
+            useCORS: true, // Importante se tiver imagens externas
+            backgroundColor: '#0f172a' // Garante que o fundo fique da cor correta
+        },
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait' // Pode ser 'landscape' (paisagem) se preferir
+        }
+    };
+
+    // Gera o PDF
+    // Mostra um feedback visual simples no botão (opcional)
+    const btn = document.getElementById('gerarPDF');
+    const footerPDF = document.getElementById('footerPDF');
+    const dataGeracao = document.getElementById('dataGeracao');
+    const rankingTitle = document.getElementById('rankingTitle');
+    const dataAtual = new Date();
+    const dia = String(dataAtual.getDate()).padStart(2, '0');
+    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+    btn.style.display = 'none';
+    footerPDF.style.display = 'block';
+    rankingTitle.style.display = 'none';
+    dataGeracao.innerText = `${dia}/${mes}/${dataAtual.getFullYear()} às ${String(dataAtual.getHours()).padStart(2, '0')}:${String(dataAtual.getMinutes()).padStart(2, '0')}`;
+
+    element.classList.toggle('theme-light', true);
+
+    html2pdf().set(options).from(element).save().then(() => {
+        footerPDF.style.display = 'none';
+        btn.style.display = 'initial';
+        rankingTitle.style.display = 'block';
+
+        element.classList.toggle('theme-light', false);
+    });
+}

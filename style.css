@@ -1,6 +1,6 @@
 body {
     background: #0f1624;
-    color: white;
+    color: #eef;
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
@@ -17,6 +17,21 @@ body {
     margin-bottom: 20px;
 }
 
+.pdf-btn {
+    padding: 10px 20px;
+    margin: 15px 0;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: #5b4dff;
+    color: #eef;
+}
+
+.theme-light {
+    color: #111;
+}
+
 .menu-btn {
     padding: 10px 20px;
     margin: 5px;
@@ -25,7 +40,7 @@ body {
     cursor: pointer;
     font-weight: bold;
     background: #1e2536;
-    color: white;
+    color: #eef;
 }
 
 .menu-btn.active {
@@ -57,7 +72,7 @@ body {
     margin: 5px;
     border-radius: 25px;
     border: 2px solid transparent;
-    color: white;
+    color: #eef;
     background: #20283a;
     cursor: pointer;
     transition: 0.3s;
@@ -100,7 +115,7 @@ body {
     border-radius: 20px;
     background: #5b4dff;
     border: none;
-    color: white;
+    color: #eef;
     cursor: pointer;
 }
 
@@ -111,6 +126,11 @@ body {
     border-radius: 12px;
     margin-bottom: 25px;
     text-align: left;
+}
+
+.theme-light .rank-box {
+    background: #dde;
+    color: #111;
 }
 
 .rank-line {
@@ -172,6 +192,6 @@ body {
     border-radius: 8px;
     border: none;
     background: #5b4dff;
-    color: white;
+    color: #eef;
     cursor: pointer;
 }

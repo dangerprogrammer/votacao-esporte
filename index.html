@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prêmio Votação Digital</title>
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
@@ -32,8 +34,12 @@
 
     <!-- TELA DE RANKING -->
     <div id="rankingContainer" style="display:none;">
-        <h1>Resultados em Tempo Real</h1>
+        <h1 id="rankingTitle">Resultados em Tempo Real</h1>
+        <button id="gerarPDF" class="pdf-btn" onclick="gerarPDF()">Gerar PDF dos Votos</button>
         <div id="rankingContent"></div>
+        <footer style="display:none;" id="footerPDF">
+            Gerado em <span id="dataGeracao"></span>
+        </footer>
     </div>
 
     <div id="senhaOverlay" class="overlay" style="display:none;">
