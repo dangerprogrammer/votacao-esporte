@@ -3,26 +3,77 @@
 // ========================
 const categorias = {
     sub6: [
-        { nome: "Pedro Veloz", img: "imgs/pedro.png" },
-        { nome: "Lucas Goleador", img: "img/lucas.png" }
+        { nome: "Henry", img: "imgs/sub6/henry.jpeg" },
+		{ nome: "Miguel", img: "imgs/sub6/miguel.jpeg" },
+        { nome: "Henry", img: "imgs/sub6/henry.jpeg" },
+		{ nome: "Henry", img: "imgs/sub6/henry.jpeg" },
+		{ nome: "Henry", img: "imgs/sub6/henry.jpeg" },
+		{ nome: "Henry", img: "imgs/sub6/henry.jpeg" },
+		{ nome: "Henry", img: "imgs/sub6/henry.jpeg" }
     ],
     sub7: [
-        { nome: "Gabriel Ágil", img: "img/gabriel.png" },
-        { nome: "Matheus Forte", img: "img/matheus.png" }
+        { nome: "Davi", img: "imgs/sub7/davi.jpeg" },
+        { nome: "Gabriel", img: "imgs/sub7/gabriel.jpeg" },
+		{ nome: "João Otávio", img: "imgs/sub7/joaootavio.jpeg" },
+		{ nome: "João Lucas", img: "imgs/sub7/joaolucas.jpeg" },
+		{ nome: "Kaleb", img: "imgs/sub7/kaleb.jpeg" },
+		{ nome: "Leonardo", img: "imgs/sub7/leonardo.jpeg" },
+		{ nome: "Pedro", img: "imgs/sub7/pedro.jpeg" },
+		{ nome: "Samuel", img: "imgs/sub7/samuel.jpeg" },
+		{ nome: "Manuela", img: "imgs/sub7/manuela.jpeg" },
+		{ nome: "Miguel", img: "imgs/sub7/miguel.jpeg" },
     ],
     sub8: [
         { nome: "Davi Drible", img: "img/davi.png" },
         { nome: "Felipe Defesa", img: "img/felipe.png" }
-    ]
+    ] ,
+	 sub9: [
+        { nome: "Arthur", img: "imgs/sub9/arthur.jpeg" },
+		{ nome: "Davi Luno", img: "imgs/sub9/daviluno.jpeg" },
+		{ nome: "Elyelson", img: "imgs/sub9/elyelson.jpeg" },
+		{ nome: "Leonardo", img: "imgs/sub9/leonardo.jpeg" },
+		{ nome: "Luís", img: "imgs/sub9/luis.jpeg" },
+		{ nome: "Nícolas", img: "imgs/sub9/nicolas.jpeg" },
+		{ nome: "Rafinha", img: "imgs/sub9/rafinha.jpeg" },
+		{ nome: "Tayllison", img: "imgs/sub9/Tayllison.jpeg" },
+		{ nome: "Théo José", img: "imgs/sub9/theojose.jpeg" },
+		{ nome: "Théo Enrico", img: "imgs/sub9/theoenrico.jpeg" }
+		
+    ] ,
+	 sub10: [
+        { nome: "Felipe", img: "imgs/sub10/felipe.jpeg" },
+		{ nome: "Gabriel", img: "imgs/sub10/gabriel.jpeg" },
+		{ nome: "João Miguel", img: "imgs/sub10/joaomiguel.jpeg" },
+		{ nome: "João Vitor", img: "imgs/sub10/joaovitor.jpeg" },
+		{ nome: "Jonas", img: "imgs/sub10/jonas.jpeg" },
+		{ nome: "José", img: "imgs/sub10/jose.jpeg" },
+		{ nome: "Mateus", img: "imgs/sub10/mateus.jpeg" },
+		{ nome: "Miguel", img: "imgs/sub10/miguel.jpeg" },
+		{ nome: "Pietro", img: "imgs/sub10/pietro.jpeg" }
+    ] ,
+	sub12: [
+        { nome: "Bernardo", img: "imgs/sub12/bernardo.jpeg" },
+		{ nome: "Kaio", img: "imgs/sub12/kaio.jpeg" },
+		{ nome: "Evandro", img: "imgs/sub12/evandro.jpeg" },
+		{ nome: "Joaquim", img: "imgs/sub12/joaquim.jpeg" },
+		{ nome: "Jhenifer", img: "imgs/sub12/jhenifer.jpeg" },
+		{ nome: "Miguel Serrano", img: "imgs/sub12/miguelserrano.png" },
+		{ nome: "Pedro Antonio", img: "imgs/sub12/pedroantonio.jpg" },
+        { nome: "Pedro Fagner", img: "imgs/sub12/pedrofagner.png" },
+		{ nome: "Paulo", img: "imgs/sub12/paulo.jpeg" },
+		{ nome: "Pietro", img: "imgs/sub12/pietro.png" }
+	]
 };
 
 // ========================
 // VOTOS (localStorage)
 // ========================
-let votos = JSON.parse(localStorage.getItem("votos")) || {
-    sub6: [0, 0],
-    sub7: [0, 0],
-    sub8: [0, 0]
+let votos = JSON.parse(localStorage.getItem("votos")) || generateVotos();
+
+function generateVotos() {
+    return Object.fromEntries(
+        Object.keys(categorias).map(cat => [cat, new Array(categorias[cat].length).fill(0)])
+    );
 };
 
 function salvarVotos() {
